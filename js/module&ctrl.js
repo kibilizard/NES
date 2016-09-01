@@ -47,18 +47,21 @@ var nesApp = angular.module('nesApp', []);
 				$scope.undol = function(cont,obj,type){
 					if (typeof(obj.id) != 'undefined')
 					{
-						$scope.message = 'Удаляем: '+obj.name+' со всеми вложениями!';
-						var id = obj.id;
-						for (var i=0; i < cont.length; i++)
-						{
-							if (cont[i].id == id)
-								break;
-						};
-						cont.splice(i,1);
-						var xhr = new XMLHttpRequest();
-						var url = 'http://kibilizard.org/nes/delette.php?type='+type+'&id='+id;
-						xhr.open('GET', url, false);
-						xhr.send();
+                        			if (confirm('Вы действительно хотите удалить '+obj.name+' со всеми вложениями?'))
+                        			{
+                          				$scope.message = 'Удаляем: '+obj.name+' со всеми вложениями!';
+							var id = obj.id;
+							for (var i=0; i < cont.length; i++)
+							{
+								if (cont[i].id == id)
+									break;
+							};
+							cont.splice(i,1);
+							var xhr = new XMLHttpRequest();
+							var url = 'http://kibilizard.org/nes/delette.php?type='+type+'&id='+id;
+							xhr.open('GET', url, false);
+							xhr.send();
+                				}
 					}
 					else 
 					{
@@ -86,11 +89,15 @@ var nesApp = angular.module('nesApp', []);
 						
 						if (here) obj.name = obj.tmp;
 						else if (obj.name != obj.tmp){
-							$scope.message = 'Заменяем '+obj.tmp+' на '+obj.name+'!';
-							var xhr = new XMLHttpRequest();
-							var url = 'http://kibilizard.org/nes/update.php?type='+type+'&id='+obj.id+'&name='+obj.name;
-							xhr.open('GET', url, false);
-							xhr.send();
+                          				if (confirm('Заменить '+obj.tmp+' на '+obj.name+'?'))
+                        				{
+								$scope.message = 'Заменяем '+obj.tmp+' на '+obj.name+'!';
+								var xhr = new XMLHttpRequest();
+								var url = 'http://kibilizard.org/nes/update.php?type='+type+'&id='+obj.id+'&name='+obj.name;
+								xhr.open('GET', url, false);
+								xhr.send();
+                            				}
+                        				 else obj.name = obj.tmp;
 						}
 					}
 					else 
