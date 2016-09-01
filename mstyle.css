@@ -38,6 +38,25 @@ input.clean{
 	right:0px; 
 	margin:auto;
 }
+#np, #str, #h, #ap{
+	float:left;  
+	padding-left:10px;
+}
+#np, #str, #h{
+	border-right:1px solid black;
+}
+#np{
+	width:190px;
+} 
+#str{
+	width:185px;
+} 
+#h{
+	width:60px;
+}
+#ap{
+	width:50px;
+}
 #search{
 	width:780px;
 	padding-top:10px;
